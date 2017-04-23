@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>map demo</title>
+  <style>
+  body {
+    font-size: 16px;
+  }
+  ul {
+    float: left;
+    margin: 0 30px;
+    color: blue;
+  }
+  #results {
+    color: red;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<ul>
+  <li id="c1">First</li>
+  <li id="c2">Second</li>
+  <li id="c3">Third</li>
+  <li id="c4">Fourth</li>
+  <li id="c5">Fifth</li>
+</ul>
+
+ 
+ <button onclick="myFunction()">Try it</button>
+ 
+ <ul id="results"></ul>
+ 
+<script>
+
+
+function myFunction() 
+{ 
+   // var item = document.getElementById("myLI");
+   // item.parentNode.removeChild(item);
+
+
+	var mappedItems = $( "li" ).map(function( index ) {
+  
+	var replacement = $( "<li>" ).text( $( this ).text() ).get( 0 );
+    if ( index == 3 ) 
+	{
+  var item = document.getElementById("c"+index);
+   item.parentNode.removeChild(item);
+    // Delete the second and fourth items
+    replacement = null;
+  } 
+   
+ 
+  // Replacement will be a dom element, null,
+  // or an array of dom elements
+  return replacement;
+});
+
+
+$( "#results" ).append( mappedItems );}
+</script>
+ 
+</body>
+</html>

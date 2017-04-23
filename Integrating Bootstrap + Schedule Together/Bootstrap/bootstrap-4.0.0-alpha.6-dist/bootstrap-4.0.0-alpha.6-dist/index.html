@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Team 1 - The Dragons - Bootstrap Design</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="js/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script>
+        if (!window.jQuery) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+    </script>
+    <script src="js/main.js"></script>
+    <!-- Resource jQuery -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <!-- CSS reset -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
+    <!-- Resource style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" media="screen">
+    <!-- Added CSS -->
+    <link href="css/dragons.css" type="text/css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Top Menu Nav Bar -->
+    <nav id="mainNav" class="navbar navbar-inverse navbar-fixed-top navbar-custom">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <!-- Title Logo -->
+                <a class="navbar-brand" href="#page-top">
+					Weekly Schedule Designer
+				</a>
+            </div>
+
+            <!-- Menu Nav Links -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">Create</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Calendar Edit Menu Nav Bar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top second-navbar">
+        <div class="container-fluid">
+
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span> Edit Events <i class="fa fa-bars"></i>
+                </button>
+                <!-- Title Logo -->
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <div class="row navbar-btn-center">
+
+                    <!-- <button id="editTitle" type="button" name="editTitle" class="btn navbar-btn btn-bold btn-info" onclick="editTitle()">Edit Title</button> -->
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn navbar-btn btn-bold btn-info" data-toggle="modal" data-target="#calLayoutModal">Edit Calendar Layout</button>
+                    <!-- <button id="editStartTime" type="button" name="editStartTime" class="btn navbar-btn btn-info" onclick="editStartTime()">Edit Start Time</button> -->
+                    <button type="button" class="btn navbar-btn btn-bold btn-info" data-toggle="modal" data-target="#formModal">Add Event</button>
+
+                    <button id="removeSingleItembtn" type="button" name="removeSingleItembtn" class="btn navbar-btn btn-bold btn-info">Remove Event</button>
+
+                    <button id="removeItemsbtn" type="button" name="removeItemsbtn" class="btn navbar-btn btn-bold btn-info">Remove All</button>
+                    <button style="display: none;" id="updateEventsbtn" type="button" name="updateEventsbtn" class="btn navbar-btn btn-bold btn-info">Update</button>
+                    <button id="printCalbtn" type="button" name="removeItemsbtn" class="btn navbar-btn btn-bold btn-info" onclick="javascript:printDiv('calPrint')" />Print Calendar</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- <!-- Calendar Edit Menu Nav Bar -->-->
+
+    <!-- <nav class="navbar navbar-default navbar-fixed-top third-navbar"> -->
+    <!-- <div class="container-fluid"> -->
+
+    <!-- <div class="navbar-header page-scroll"> -->
+
+    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> -->
+    <!-- <span class="sr-only">Toggle navigation</span> Edit Events <i class="fa fa-bars"></i> -->
+    <!-- </button> -->
+    <!-- <!-- Title Logo -->-->
+
+    <!-- </div> -->
+
+    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+    <!-- <div class="row navbar-btn-center"> -->
+    <!-- <div class="col-md-offset-2 col-md-12 text-center"> -->
+    <!-- <form class="form-horizontal"> -->
+    <!-- <div class="form-group"> -->
+
+    <!-- <label for="editStart" class="control-label col-sm-2">Edit Start-Time</label> -->
+
+    <!-- <input class="timeStartCheckBox col-sm-1" type="checkbox" /> -->
+
+    <!-- <div class="timeStartDiv col-sm-1"> -->
+
+    <!-- <input type="text" class="form-control" id="editStart" placeholder="8:00"> -->
+
+    <!-- </div> -->
+
+    <!-- <button id="editStartTime" type="button" name="editStartTime" class="timeStartBtn btn btn-info btn-sm" onclick="editStartTime()">Edit</button> -->
+
+    <!-- <label for="editStart" class="control-label col-sm-2">Edit End-Time</label> -->
+
+    <!-- <input class="timeEndCheckBox col-sm-1" type="checkbox" /> -->
+
+    <!-- <div class="timeEndDiv col-sm-1"> -->
+
+    <!-- <input type="text" class="form-control" id="editEnd" placeholder="8:00"> -->
+
+    <!-- </div> -->
+
+    <!-- <button id="editEndTime" type="button" name="editEndTime" class="timeEndBtn btn btn-info btn-sm" onclick="editEndTime()">Edit</button> -->
+
+    <!-- </div> -->
+
+    <!-- </form> -->
+
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+
+    <!-- </div> -->
+    <!-- </nav> -->
+
+    <!-- Header Area -->
+    <!-- <header> -->
+    <!-- <div class="container" tabindex="-1"> -->
+    <!-- <div class="row"> -->
+    <!-- <div class="col-lg-12"> -->
+    <!-- <img class="img-responsive" src="img/profile.png" alt=""> -->
+    <!-- <div class="intro-text"> -->
+    <!-- <h1 class="name">Your Schedule Designer</h1> -->
+    <!-- <hr class="star-light"> -->
+    <!-- <span class="skills">Customize your Weekly Calendar - Keep up and get ahead!</span> -->
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
+
+    <!-- </div> -->
+    <!-- </header> -->
+
+    <!-- Modal -->
+    <div class="modal" id="formModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add an Event</h4>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Contact Section -->
+                    <!-- <section id="contact"> -->
+
+                    <form id="addEventForm" class="form-horizontal">
+                        <fieldset>
+
+                            <!-- Event Name Text input  -->
+                            <div class="form-group">
+                                <label for="eventName" class="control-label col-sm-3">Event Name *</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="eventName" name="eventName" placeholder="" required="" autofocus>
+                                    <span id="helpEventName" class="help helpEventName">Please enter the name of your event.</span>
+                                </div>
+                            </div>
+                            <!-- Event Type Text input  -->
+                            <div class="form-group">
+                                <label for="eventType" class="control-label col-sm-3">Event Type</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="eventType" placeholder="">
+
+                                </div>
+                            </div>
+
+                            <!-- Checkboxes -->
+                            <div class="form-group">
+                                <label for="checkboxes" class="control-label col-sm-3">Select Days</label>
+
+                                <div class="checkbox col-md-8">
+                                    <div class="dayCheckbox">
+                                        <div class="dayCheckboxCenter">
+
+                                            <label>Mon</label>
+                                            <br/>
+                                            <input type="checkbox" class="weekDayCheckBox" name="checkbox" value="value" id="cbMonday">
+                                        </div>
+                                    </div>
+
+                                    <div class="dayCheckbox">
+                                        <div class="dayCheckboxCenter">
+
+                                            <label>Tue</label>
+                                            <br/>
+                                            <input type="checkbox" class="weekDayCheckBox" name="checkbox" value="value" id="cbTuesday">
+                                        </div>
+                                    </div>
+
+                                    <div class="dayCheckbox">
+                                        <div class="dayCheckboxCenter">
+
+                                            <label>Wed</label>
+                                            <br/>
+                                            <input type="checkbox" class="weekDayCheckBox" name="checkbox" value="value" id="cbWednesday">
+                                        </div>
+                                    </div>
+
+                                    <div class="dayCheckbox">
+                                        <div class="dayCheckboxCenter">
+
+                                            <label>Thu</label>
+                                            <br/>
+                                            <input type="checkbox" class="weekDayCheckBox" name="checkbox" value="value" id="cbThursday">
+                                        </div>
+                                    </div>
+
+                                    <div class="dayCheckbox">
+                                        <div class="dayCheckboxCenter">
+
+                                            <label>Fri</label>
+                                            <br/>
+                                            <input type="checkbox" class="weekDayCheckBox" name="checkbox" value="value" id="cbFriday">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="dayCheckbox"> -->
+                                    <!-- <div class="dayCheckboxCenter"> -->
+
+                                    <!-- <label>Sat</label> -->
+                                    <!-- <br/> -->
+                                    <!-- <input type="checkbox" name="checkbox" value="value" id="cbSaturday"> -->
+                                    <!-- </div> -->
+                                    <!-- </div> -->
+
+                                    <!-- <div class="dayCheckbox"> -->
+                                    <!-- <div class="dayCheckboxCenter"> -->
+
+                                    <!-- <label>Sun</label> -->
+                                    <!-- <br/> -->
+                                    <!-- <input type="checkbox" name="checkbox" value="value" id="cbSunday"> -->
+                                    <!-- </div> -->
+                                    <!-- </div> -->
+                                    <br/><span id="helpCheckBoxes" class="help helpCheckBoxes">Please select the day(s) of your event.</span>
+
+                                </div>
+
+                            </div>
+                            <!-- end checkboxes-->
+
+                            <!-- Select Basic -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="selectbasic">Start Time</label>
+                                <div class="col-sm-6">
+                                    <select id="startTime" name="startTime" class="form-control">
+                                         <option value="0">12:00 am</option>
+                                        <option value="1">1:00 am</option>
+                                        <option value="2">2:00 am</option>
+                                        <option value="3">3:00 am</option>
+                                        <option value="4">4:00 am</option>
+                                        <option value="5">5:00 am</option>
+                                        <option value="6">6:00 am</option>
+                                        <option value="7">7:00 am</option>
+                                        <option value="8">8:00 am</option>
+                                        <option value="9">9:00 am</option>
+                                        <option value="10">10:00 am</option>
+                                        <option value="11">11:00 am</option>
+                                        <option value="12">12:00 pm</option>
+                                        <option value="13">1:00 pm</option>
+                                        <option value="14">2:00 pm</option>
+                                        <option value="15">3:00 pm</option>
+                                        <option value="16">4:00 pm</option>
+                                        <option value="17">5:00 pm</option>
+                                        <option value="18">6:00 pm</option>
+                                        <option value="19">7:00 pm</option>
+                                        <option value="20">8:00 pm</option>
+                                        <option value="21">9:00 pm</option>
+                                        <option value="22">10:00 pm</option>
+                                        <option value="23">11:00 pm</option>
+                                    </select>
+									<span id="helpStartTime" class="help helpStartTime">Please enter the start time of your event.</span>
+                                </div>
+                            </div>
+                            <!-- end start time select -->
+
+                            <!-- Select Basic -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="selectbasic">End Time</label>
+                                <div class="col-sm-6">
+                                    <select id="endTime" name="endTime" class="form-control">
+                                    
+                                        <option value="1">1:00 am</option>
+                                        <option value="2">2:00 am</option>
+                                        <option value="3">3:00 am</option>
+                                        <option value="4">4:00 am</option>
+                                        <option value="5">5:00 am</option>
+                                        <option value="6">6:00 am</option>
+                                        <option value="7">7:00 am</option>
+                                        <option value="8">8:00 am</option>
+                                        <option value="9">9:00 am</option>
+                                        <option value="10">10:00 am</option>
+                                        <option value="11">11:00 am</option>
+                                        <option value="12">12:00 pm</option>
+                                        <option value="13">1:00 pm</option>
+                                        <option value="14">2:00 pm</option>
+                                        <option value="15">3:00 pm</option>
+                                        <option value="16">4:00 pm</option>
+                                        <option value="17">5:00 pm</option>
+                                        <option value="18">6:00 pm</option>
+                                        <option value="19">7:00 pm</option>
+                                        <option value="20">8:00 pm</option>
+                                        <option value="21">9:00 pm</option>
+                                        <option value="22">10:00 pm</option>
+                                        <option value="23">11:00 pm</option>
+                                    </select>
+									<span id="helpEndTime" class="help helpEndTime">Please enter the end time of your event.</span>
+                                </div>
+                            </div>
+                            <!-- end end time select -->
+
+                            <!-- <!-- Text input  -->  
+                            <!-- <div class="form-group"> -->
+                                <!-- <label for="startTime" class="control-label col-sm-3">Start Time</label> -->
+                                <!-- <div class="col-sm-6"> -->
+                                    <!-- <input type="time" class="form-control" id="startTimeH" name="startTimeH" placeholder="" required> -->
+                                    <!-- <span id="helpStartTime" class="help helpStartTime">Please enter the start time of your event.</span> -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                            <!-- <!-- Text input -->  
+                            <!-- <div class="form-group"> -->
+                                <!-- <label for="endTime" class="control-label col-sm-3">End Time</label> -->
+                                <!-- <div class="col-sm-6"> -->
+                                    <!-- <input type="time" class="form-control" id="endTimeH" placeholder="" required> -->
+                                    <!-- <span id="helpEndTime" class="help helpEndTime">Please enter the end time of your event.</span> -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                            <!--  -->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="description">Description</label>
+                                <div class="col-sm-6">
+                                    <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+
+                                </div>
+                            </div>
+
+                            <!--  Select Color -->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="color">Event Color</label>
+                                <div class="controls text-left col-sm-6">
+
+                                    <select id="color" name="color" class="form-control">
+                                        <option id="red" value="#ff4d4d">Red </option>
+                                        <option id="orange" value="#ffa64d">Orange</option>
+                                        <option id="yellow" value="#ffd24d">Yellow</option>
+                                        <option id="green" value="#d2ff4d">Green </option>
+                                        <option id="indigo" value="#4d79ff">Blue </option>
+                                        <option id="indigo" value="#4dd2ff">Indigo</option>
+                                        <option id="violet" value="#d24dff">Violet</option>
+                                        <option id="grey" value="#cccccc">Grey </option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+
+                    <div class="modal-footer">
+                        <!-- <button id="submitadd" type="button" name="submitadd" class="btn navbar-btn btn-info" data-dismiss="modal">Add Event</button> -->
+                        <button id="submitadd" type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Add Event</button>
+
+                        <button id="closeModalbtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+
+                </div>
+                <!-- end modal body -->
+                <!-- </section> -->
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- end add event modal-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="calLayoutModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Calendar Layout</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Edit Options</label>
+
+                    <form id="addEventForm" class="form-horizontal">
+                        <fieldset>
+
+                            <div class="row">
+                                <label for="calTitle" class="control-label col-sm-3">Calendar Title</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+
+                                        <input type="text" id="editTitleTextBox" class="form-control" placeholder="My Calendar">
+
+                                        <span class="input-group-btn">
+											    <!-- <button id="editTitle" type="button" name="editTitle" class="btn navbar-btn btn-bold btn-info" onclick="editTitle()">Edit Title</button> -->
+												<button id="editTitle" type="button" name="editTitle" class="btn btn-info"  onclick="editTitle()">Edit</button>
+											</span>
+                                    </div>
+                                    <!-- /input-group -->
+                                </div>
+                                <!-- /.col-lg-6 -->
+                            </div>
+                            <!-- /.row -->
+                            <br/>
+							<div class="row">
+                                <label for="calTitle" class="control-label col-sm-3">Calendar Details</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+
+                                        <input type="text" id="editDetailsTextBox" class="form-control" placeholder="My Calendar">
+
+                                        <span class="input-group-btn">
+											    <!-- <button id="editTitle" type="button" name="editTitle" class="btn navbar-btn btn-bold btn-info" onclick="editTitle()">Edit Title</button> -->
+												<button id="editDetails" type="button" name="editDetails" class="btn btn-info"  onclick="editDetails()">Edit</button>
+												<button id="removeDetails" type="button" name="removeDetails" class="btn btn-danger"  onclick="removeDetails()">X</button>
+											</span>
+                                    </div>
+                                    <!-- /input-group -->
+                                </div>
+                                <!-- /.col-lg-6 -->
+                            </div>
+                            <!-- /.row -->
+                            <br/>
+							  <!-- Select Basic -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="selectbasic">Starting Time</label>
+                                <div class="col-sm-6">
+								 <div class="input-group">
+                                    <select id="editStartTimeBox" name="editStartTimeBox" class="form-control">
+                                        <option value="0">12:00 am</option>
+                                        <option value="1">1:00 am</option>
+                                        <option value="2">2:00 am</option>
+                                        <option value="3">3:00 am</option>
+                                        <option value="4">4:00 am</option>
+                                        <option value="5">5:00 am</option>
+                                        <option value="6">6:00 am</option>
+                                        <option value="7">7:00 am</option>
+                                        <option value="8">8:00 am</option>
+                                        <option value="9">9:00 am</option>
+                                        <option value="10">10:00 am</option>
+                                        <option value="11">11:00 am</option>
+                                        <option value="12">12:00 pm</option>
+                                        <option value="13">1:00 pm</option>
+                                        <option value="14">2:00 pm</option>
+                                        <option value="15">3:00 pm</option>
+                                        <option value="16">4:00 pm</option>
+                                        <option value="17">5:00 pm</option>
+                                        <option value="18">6:00 pm</option>
+                                        <option value="19">7:00 pm</option>
+                                        <option value="20">8:00 pm</option>
+                                        <option value="21">9:00 pm</option>
+                                        <option value="22">10:00 pm</option>
+                                        <option value="23">11:00 pm</option>
+                                    </select>
+									 <span class="input-group-btn">
+											<button id="editStartTime" name="editStartTime" class="btn btn-info" type="button" onclick="editStartTime()">Edit</button>
+										</span>
+										     </div>  <!-- /input-group -->
+									 <span id="helpEditStartTime" class="help helpEditStartTime">Please enter the new start time of your event.</span>
+                                </div>
+                            </div>
+                            <!-- end start time select -->
+							
+							 <!-- Select edit end time -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="selectbasic">Ending Time</label>
+                                <div class="col-sm-6">
+								 <div class="input-group">
+                                    <select id="editEndTimeBox" name="editEndTimeBox" class="form-control">
+                                        
+                                        <option value="1">1:00 am</option>
+                                        <option value="2">2:00 am</option>
+                                        <option value="3">3:00 am</option>
+                                        <option value="4">4:00 am</option>
+                                        <option value="5">5:00 am</option>
+                                        <option value="6">6:00 am</option>
+                                        <option value="7">7:00 am</option>
+                                        <option value="8">8:00 am</option>
+                                        <option value="9">9:00 am</option>
+                                        <option value="10">10:00 am</option>
+                                        <option value="11">11:00 am</option>
+                                        <option value="12">12:00 pm</option>
+                                        <option value="13">1:00 pm</option>
+                                        <option value="14">2:00 pm</option>
+                                        <option value="15">3:00 pm</option>
+                                        <option value="16">4:00 pm</option>
+                                        <option value="17">5:00 pm</option>
+                                        <option value="18">6:00 pm</option>
+                                        <option value="19">7:00 pm</option>
+                                        <option value="20">8:00 pm</option>
+                                        <option value="21">9:00 pm</option>
+                                        <option value="22">10:00 pm</option>
+                                        <option value="23">11:00 pm</option>
+                                    </select>
+									 <span class="input-group-btn">
+											<button id="editEndTime" name="editEndTime" class="btn btn-info" type="button" onclick="editEndTime()">Edit</button>
+										</span>
+										     </div>  <!-- /input-group -->
+									 <span id="helpEditEndTime" class="help helpEditEndTime">Please enter the new end time of your event.</span>
+                                </div>
+                            </div>
+                            <!-- end end time select -->
+							
+                            <div class="row">
+                                <label for="calTitle" class="control-label col-sm-3">Weekend Days </label>
+                                <div class="col-sm-2">
+                                    <input type="checkbox" class="checkbox-inline weekend" name="weekendCheckBox" id="weekendCheckBox-1" value="Sunday">
+                                    <!-- /input-group -->
+                                </div>
+                                <!-- /.col-lg-6 -->
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+      function printDiv(divID) 
+   {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML =
+                "<html><head><title></title></head><body>" +
+                divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+        }
+    </script>
+
+    <!-- Calendar Section -->
+    <section id="calendar">
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            <div id="calPrint">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="intro-text">
+                            <h1 id="scheduleTitle" class="name">Your Schedule Designer</h1>
+                            <hr class="star-light">
+                            <span id="details" class="details">Customize your Weekly Calendar - Keep up and get ahead!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="cd-schedule loading">
+                        <div class="timeline">
+                            <ul id="timeList">
+								<li data-hour="am"><span>&nbsp;8:00</span></li>
+                                <li data-hour="am"><span>&nbsp;8:30</span></li>
+                                <li data-hour="am"><span>&nbsp;9:00</span></li>
+                                <li data-hour="am"><span>&nbsp;9:30</span></li>
+                                <li data-hour="am"><span>10:00</span></li>
+                                <li data-hour="am"><span>10:30</span></li>
+                                <li data-hour="am"><span>11:00</span></li>
+                                <li data-hour="am"><span>11:30</span></li>
+                                <li data-hour="pm"><span>12:00</span></li>
+                                <li data-hour="pm"><span>12:30</span></li>
+                                <li data-hour="pm"><span>&nbsp;1:00</span></li>
+                                <li data-hour="pm"><span>&nbsp;1:30</span></li>
+                                <li data-hour="pm"><span>&nbsp;2:00</span></li>
+                                <li data-hour="pm"><span>&nbsp;2:30</span></li>
+                                <li data-hour="pm"><span>&nbsp;3:00</span></li>
+                                <li data-hour="pm"><span>&nbsp;3:30</span></li>
+                                <li data-hour="pm"><span>&nbsp;4:00</span></li>
+                                <li data-hour="pm"><span>&nbsp;4:30</span></li>
+                                <li data-hour="pm"><span>&nbsp;5:00</span></li>
+                                <li data-hour="pm"><span>&nbsp;5:30</span></li>
+                                <li data-hour="pm"><span>&nbsp;6:00</span></li>
+                               </ul>
+                        </div>
+                        <!-- .timeline -->
+
+                        <div class="events">
+                            <ul class="weekEvents" id="weeksEvents">
+                                <li class="events-group">
+                                    <div class="top-info"><span>Monday</span></div>
+
+                                    <ul class="Monday weekHt" id="Monday">
+                                       
+                                    </ul>
+                                </li>
+
+                                <li class="events-group">
+                                    <div class="top-info"><span>Tuesday</span></div>
+
+                                    <ul class="Tuesday weekHt" id="Tuesday"></ul>
+                                </li>
+
+                                <li class="events-group">
+                                    <div class="top-info"><span>Wednesday</span></div>
+
+                                    <ul class="Wednesday weekHt" id="Wednesday"></ul>
+                                </li>
+
+                                <li class="events-group">
+                                    <div class="top-info"><span>Thursday</span></div>
+
+                                    <ul class="Thursday weekHt" id="Thursday"></ul>
+                                </li>
+
+                                <li class="events-group">
+                                    <div class="top-info"><span>Friday</span></div>
+
+                                    <ul class="Friday weekHt" id="Friday">
+ 
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="event-modal">
+                            <header class="header">
+                                <div class="content">
+                                    <span class="event-date"></span>
+                                    <h3 class="event-name"></h3>
+                                </div>
+
+                                <div class="header-bg"></div>
+                            </header>
+
+                            <div class="body">
+                                <div class="event-info"></div>
+                                <div class="body-bg"></div>
+                            </div>
+
+                            <a href="#0" class="close">Close</a>
+                        </div>
+
+                        <div class="cover-layer"></div>
+                    </div>
+                    <!-- .cd-schedule -->
+
+                </div>
+                <!--end row-->
+            </div>
+        </div>
+    </section>
+
+    <script src="js/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script>
+        if (!window.jQuery) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+    </script>
+    <script src="js/main.js"></script>
+    <!-- Resource jQuery -->
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-4">
+                <h3>Column 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+
+            <div class="col-sm-4">
+                <h3>Column 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+
+            <div class="col-sm-4">
+                <h3>Column 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                </div>
+                <div class="col-lg-4">
+                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="#" class="btn btn-lg btn-outline">
+                        <i class="fa fa-download"></i> Download Theme
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
