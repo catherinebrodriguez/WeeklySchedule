@@ -65,7 +65,7 @@ jQuery(document).ready(function($)
 		} 
 		
 		//in this case you are on a mobile version (first load or resize from desktop)
-		else if(  mq == 'mobile' && this.element.hasClass('js-full') ) 
+		else if(  mq == 'mobile' )//&& this.element.hasClass('js-full') ) 
 		{	 
 			this.element.removeClass('js-full loading');
 			this.eventsGroup.children('ul').add(this.singleEvents).removeAttr('style');
@@ -214,6 +214,9 @@ jQuery(document).ready(function($)
 			self.element.addClass('content-loaded');
 		});
 
+		$('.event-info').prepend('<h3 class="event-info">' + event.parent().attr('data-content') + '</h3>');
+			self.element.addClass('content-loaded');
+			
 		this.element.addClass('modal-is-open');
 
 		setTimeout(function(){
@@ -221,7 +224,8 @@ jQuery(document).ready(function($)
 			event.parent('li').addClass('selected-event');
 		}, 10);
 
-		if( mq == 'mobile' ) {
+		if( mq == 'mobile' ) 
+		{
 			self.modal.one(transitionEnd, function(){
 				self.modal.off(transitionEnd);
 				self.animating = false;
@@ -513,7 +517,7 @@ jQuery(document).ready(function($)
 	{
 		document.getElementById("eventName").focus();
 		
-		$(document.getElementById("helpEventName")).css("visibility", "visible");
+		$(document.getElementById("helpEventName")).css({"visibility": "visible", "color": "#d9534f"});
 		$(document.getElementById("helpCheckBoxes")).css("visibility", "hidden");
 		$(document.getElementById("helpStartTime")).css("visibility", "hidden");
 		$(document.getElementById("helpEndTime")).css("visibility", "hidden");
@@ -523,22 +527,22 @@ jQuery(document).ready(function($)
 	else if(!checkedOne)
 	{	
 		$(document.getElementById("helpEventName")).css("visibility", "hidden");
-		$(document.getElementById("helpCheckBoxes")).css("visibility", "visible");
+		$(document.getElementById("helpCheckBoxes")).css({"visibility": "visible", "color": "#d9534f"});
 		$(document.getElementById("helpStartTime")).css("visibility", "hidden");
 		$(document.getElementById("helpEndTime")).css("visibility", "hidden");
 	}
 	
-	// check if start time is filled in
+	// check if selected start time is earlier than selected end
 	else if(parseInt(document.getElementById("startTime").value) >= parseInt(document.getElementById("endTime").value) )
 	{ 
 		document.getElementById("startTime").focus();
-		document.getElementById("helpStartTime").innerHTML = "Selected start time must be later than selected end time.";
+		document.getElementById("helpStartTime").innerHTML = "Start must be earlier than selected end.";
 		$(document.getElementById("helpEventName")).css("visibility", "hidden");
 		$(document.getElementById("helpCheckBoxes")).css("visibility", "hidden");
-		$(document.getElementById("helpStartTime")).css("visibility", "visible");
+		$(document.getElementById("helpStartTime")).css({"visibility": "visible", "color": "#d9534f"});
 		$(document.getElementById("helpEndTime")).css("visibility", "hidden");
 	}
-	
+ 
 	// check if end time is filled in
 	else if(document.getElementById("endTime").value == "")
 	{ 
@@ -547,16 +551,16 @@ jQuery(document).ready(function($)
 		$(document.getElementById("helpEventName")).css("visibility", "hidden");
 		$(document.getElementById("helpCheckBoxes")).css("visibility", "hidden");
 		$(document.getElementById("helpStartTime")).css("visibility", "hidden");	
-		$(document.getElementById("helpEndTime")).css("visibility", "visible");
+		$(document.getElementById("helpEndTime")).css({"visibility": "visible", "color": "#d9534f"});
 	}
 	
 	// all conditions to submit are filled 
 	else 
 	{
-	$(document.getElementById("helpEventName")).css("visibility", "hidden");
-	$(document.getElementById("helpCheckBoxes")).css("visibility", "hidden");
-	$(document.getElementById("helpStartTime")).css("visibility", "hidden");
-	$(document.getElementById("helpEndTime")).css("visibility", "hidden");
+		$(document.getElementById("helpEventName")).css("visibility", "hidden");
+		$(document.getElementById("helpCheckBoxes")).css("visibility", "hidden");
+		$(document.getElementById("helpStartTime")).css("visibility", "hidden");
+		$(document.getElementById("helpEndTime")).css("visibility", "hidden");
 	 
 	// start the actions
 	var schedules = $('.cd-schedule'); 
@@ -575,11 +579,11 @@ jQuery(document).ready(function($)
 			pos = pos + 1;
 			var stTime = document.getElementById("startTime").value;
 			var endTime = document.getElementById("endTime").value;
-			
+		 
 			var stTimeLbl;
 			var endTimeLbl;
 			 
-			var eventContent = "event-abs-circuit2";
+			var eventContent = document.getElementById("description").value;
 			var eventID = "event" + pos;
 			var eventData = "event-" + pos;
 			var eventName = document.getElementById("eventName").value;
@@ -595,7 +599,7 @@ jQuery(document).ready(function($)
 			else	
 				endTimeLbl = endTime + ":00";// AM";
 			 
-			for(i=0;i<days.length;i++) // loop through days in week
+			for(var i = 0; i < days.length; i++) // loop through days in week
 			{
 				var currDay = days[i];
 				var checkDay = "cb" + currDay;
@@ -718,8 +722,10 @@ $("#removeItemsbtn").click(function(e)
 // edit title on click
 $("#editTitle").click(function(e)
  {
-	e.stopImmediatePropagation();
+	 
+	 e.stopImmediatePropagation();
 	e.preventDefault();
+	
 	
 	var eventTitle = document.getElementById("editTitleTextBox").value;
 	 
@@ -731,14 +737,19 @@ $("#editTitle").click(function(e)
 
 // edit title on click
 $("#editDetails").click(function(e)
- {
+ {	 
+	 
 	e.stopImmediatePropagation();
 	e.preventDefault();
 	
+	var item =	document.getElementById("details");
+	var visibility = item.style.visibility;
+	item.style.visibility = 'visible';
+	
 	var eventTitle = document.getElementById("editDetailsTextBox").value;
 	 
-    document.getElementById("details").innerHTML = eventTitle;
-	 
+    item.innerHTML = eventTitle;
+
 	//$(".skills").remove();
 	   
 });
@@ -748,8 +759,10 @@ $("#removeDetails").click(function(e)
  {
 	e.stopImmediatePropagation();
 	e.preventDefault();
-	
-	$(".details").remove();
+	var item =	document.getElementById("details");
+	var visibility = item.style.visibility;
+	 
+	item.style.visibility = 'hidden';
 	   
 });
 
@@ -763,8 +776,7 @@ $("#editStartTime").click(function(e)
 	var newToCompare = parseInt(document.getElementById("editStartTimeBox").value);
 	 
 	var lastToCompare = parseInt(document.getElementById("timeList").lastElementChild.textContent);
-	
-	
+	 
 	if(document.getElementById("timeList").lastElementChild.getAttribute("data-hour") == "pm")
 	{ 
 		lastToCompare = lastToCompare + 12;		
@@ -775,20 +787,29 @@ $("#editStartTime").click(function(e)
 	{ 
 		document.getElementById("editStartTimeBox").focus();
 		document.getElementById("helpEditStartTime").innerHTML = "Please select a valid start time.";
-		$(document.getElementById("helpEditStartTime")).css("visibility", "visible");
-		$(document.getElementById("helpEditEndTime")).css("visibility", "hidden");
+		$(document.getElementById("helpEditStartTime")).css({"visibility": "visible", "color": "#d9534f"});
+		//$(document.getElementById("helpEditEndTime")).css("visibility", "hidden");
 	}
 	// check if the new starting time is later than the current ending time
 	else if(parseInt(newToCompare) >= parseInt(lastToCompare))
 	{
 		document.getElementById("editStartTimeBox").focus();
-		document.getElementById("helpEditStartTime").innerHTML = "Selected start time must be earlier than current end time.";
-		$(document.getElementById("helpEditEndTime")).css("visibility", "hidden");
-		$(document.getElementById("helpEditStartTime")).css("visibility", "visible");
+		document.getElementById("helpEditStartTime").innerHTML = "Start must be earlier than current end.";
+		//$(document.getElementById("helpEditEndTime")).css("visibility", "hidden");
+		$(document.getElementById("helpEditStartTime")).css({"visibility": "visible", "color": "#d9534f"});
+	}
+	// check if the new start time conflicts with an existing event
+	else if(!canEditStartTime(newToCompare))
+	{
+		document.getElementById("editStartTimeBox").focus();
+		document.getElementById("helpEditStartTime").innerHTML = "Start must be earlier than existing events.";
+	//	$(document.getElementById("helpEditEndTime")).css("visibility", "hidden");
+		$(document.getElementById("helpEditStartTime")).css({"visibility": "visible", "color": "#d9534f"});
 	}
 	else
 	{
 	$(document.getElementById("helpEditStartTime")).css("visibility", "hidden");
+	//$(document.getElementById("helpEditEndTime")).css("visibility", "hidden");
 	
 	var isPM = false;
 	
@@ -918,7 +939,7 @@ $("#editStartTime").click(function(e)
  
 // edit start time on click
 $("#editEndTime").click(function(e)
- {
+ {	 
 	e.stopImmediatePropagation();
 	e.preventDefault();
  
@@ -936,17 +957,25 @@ $("#editEndTime").click(function(e)
 	{
 		document.getElementById("editEndTimeBox").focus();
 		document.getElementById("helpEditStartTime").innerHTML = "Please select a valid end time.";
-		$(document.getElementById("helpEditStartTime")).css("visibility", "hidden");
-		$(document.getElementById("helpEditEndTime")).css("visibility", "visible");
+		//$(document.getElementById("helpEditStartTime")).css("visibility", "hidden");
+		$(document.getElementById("helpEditEndTime")).css({"visibility": "visible", "color": "#d9534f"});
 	}
 	
 	// check if the new end time is earlier than the current start time
 	else if(parseInt(newToCompare) <= parseInt(firstToCompare))
 	{
 		document.getElementById("editEndTimeBox").focus();
-		document.getElementById("helpEditEndTime").innerHTML = "Selected end time must be later than current start time.";
-		$(document.getElementById("helpEditStartTime")).css("visibility", "hidden");
-		$(document.getElementById("helpEditEndTime")).css("visibility", "visible");
+		document.getElementById("helpEditEndTime").innerHTML = "End time must be later than current start.";
+		//$(document.getElementById("helpEditStartTime")).css("visibility", "hidden");
+		$(document.getElementById("helpEditEndTime")).css({"visibility": "visible", "color": "#d9534f"});
+	}
+	// check if the new end time conflicts with an existing event
+	else if(!canEditEndTime(newToCompare))
+	{
+		document.getElementById("editEndTimeBox").focus();
+		document.getElementById("helpEditEndTime").innerHTML = "End time must be later than existing events.";
+		//$(document.getElementById("helpEditStartTime")).css("visibility", "hidden");
+		$(document.getElementById("helpEditEndTime")).css({"visibility": "visible", "color": "#d9534f"});
 	}
 	else
 	{
@@ -1058,6 +1087,50 @@ $("#editEndTime").click(function(e)
 	
 }); // end edit End Time
 
+$("#clearEditFormbtn").click(function(e)
+{	
+	e.stopImmediatePropagation();
+	e.preventDefault();
+	$(document.getElementById("helpEditTitle")).css("visibility", "hidden");
+	$(document.getElementById("helpEditDetails")).css("visibility", "hidden");
+	$(document.getElementById("helpEditStartTime")).css("visibility", "hidden");
+	$(document.getElementById("helpEditEndTime")).css("visibility", "hidden");
+	document.getElementById("editCalendarForm").reset();
+	document.getElementById("editTitleTextBox").focus();
+});
+
+
+ 
+$("#submitAllEditsbtn").click(function(e)
+{
+	 e.stopPropagation();
+	e.stopImmediatePropagation();
+	e.preventDefault();
+	
+	 if (e.originalEvent !== undefined)  
+		$('.btn-all').trigger('click');	 
+	
+	$(document.getElementById("helpEditTitle")).css({"visibility": "visible", "color": "#5bc0de"});
+	document.getElementById("helpEditTitle").innerHTML = "Your title was updated!";
+	
+	$(document.getElementById("helpEditDetails")).css({"visibility": "visible", "color": "#5bc0de"});
+	document.getElementById("helpEditDetails").innerHTML = "Your details were updated!";
+	
+	if($("#helpEditStartTime").css("visibility") == "hidden")
+	{  
+		$(document.getElementById("helpEditStartTime")).css({"visibility": "visible", "color": "#5bc0de"});
+		document.getElementById("helpEditStartTime").innerHTML = "Your start time was updated!";
+	}
+	if($("#helpEditEndTime").css("visibility") == "hidden")
+	{  
+		$(document.getElementById("helpEditEndTime")).css({"visibility": "visible", "color": "#5bc0de"});
+		document.getElementById("helpEditEndTime").innerHTML = "Your end time was updated!";
+	}
+	document.getElementById("editCalendarForm").reset();
+	document.getElementById("editTitleTextBox").focus();
+});
+
+//$('.btn-all').on('click', $("#submitAllEditsbtn"));
 
 // edit title on click
 $("#updateEventsbtn").click(function(e)
@@ -1083,8 +1156,48 @@ $("#updateEventsbtn").click(function(e)
 	} // end if
 	   
 });
+ 
+ 
+	function canEditStartTime(newToCompare)
+	{
+		var canEdit = true;
+		
+		var myList = document.getElementById("weeksEvents");
+		var listItems = myList.getElementsByTagName("li");
+		 
+		for (var i = 0; i < listItems.length; i++) 
+		{
+			var valToCompare = parseInt(listItems[i].getAttribute('data-start'));
+		
+			if ( parseInt(newToCompare) >  parseInt(valToCompare) ) 
+				canEdit = false;  				
+		}
+		
+		return canEdit;
+		
+	} // end canEditStartTime()
+	 
+	function canEditEndTime(newToCompare)
+	{
+		var canEdit = true;
+		
+		var myList = document.getElementById("weeksEvents");
+		var listItems = myList.getElementsByTagName("li");
+		 
+		for (var i = 0; i < listItems.length; i++) 
+		{
+			var valToCompare = parseInt(listItems[i].getAttribute('data-end'));
+		
+			if ( parseInt(newToCompare) <  parseInt(valToCompare) ) 
+				canEdit = false;  				
+		}
+		
+		return canEdit;
+		
+	} // end canEditEndTime() 
 
-   function printDiv(divID) 
+	
+  /*  function printDiv(divID) 
    {
             //Get the HTML of div
             var divElements = document.getElementById(divID).innerHTML;
@@ -1102,7 +1215,7 @@ $("#updateEventsbtn").click(function(e)
             //Restore orignal HTML
             document.body.innerHTML = oldPage;
 
-        }
+        } */
 
 }); 
 
